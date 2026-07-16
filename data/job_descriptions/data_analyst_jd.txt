@@ -1,0 +1,26 @@
+Job Title: Data Analyst Intern
+
+Responsibilities:
+- Analyze business data and generate insights.
+- Create dashboards using Power BI.
+- Write SQL queries for data analysis.
+- Clean and preprocess datasets.
+- Perform exploratory data analysis (EDA).
+- Generate reports using Excel and Python.
+
+Required Skills:
+- SQL
+- Python
+- Pandas
+- NumPy
+- Power BI
+- Microsoft Excel
+- Data Cleaning
+- Data Visualization
+- Statistics
+- Problem Solving
+- Communication Skills
+
+Preferred:
+- GitHub
+- Machine Learning Basics
