@@ -553,15 +553,41 @@ The complete screening process usually takes only a few seconds depending on the
 ---
 
 # Screenshots
+## 📸 Application Screenshots
 
-The following screenshots demonstrate different stages of the application.
+### 🏠 Home Page
 
-- Home Page
-- Resume Upload Page
-- OCR Processing
-- Ranking Dashboard
-- CSV Report
-- PDF Report
+![Home Page](assets/screenshots/home_page.png)
+
+---
+
+### 📤 Upload Job Description & Resumes
+
+![Upload Section](assets/screenshots/upload_section.png)
+
+---
+
+### 🔄 AI Resume Screening Progress
+
+![Progress Tracking](assets/screenshots/progress_tracking.png)
+
+---
+
+### 🏆 Best Candidate Dashboard
+
+![Best Candidate](assets/screenshots/best_candidate.png)
+
+---
+
+### 📊 Candidate Ranking Dashboard
+
+![Ranking Dashboard](assets/screenshots/ranking_dashboard.png)
+
+---
+
+### 📄 Generated PDF Report
+
+![PDF Report](assets/screenshots/pdf_report.png)
 
 Store all screenshots inside the following folder:
 
@@ -574,6 +600,13 @@ These images help readers understand the application's interface without running
 ---
 
 The next section covers project outputs, limitations, future improvements, contribution guidelines, license information, and acknowledgements.
+## 🌐 Live Demo
+
+Experience the application online without any local setup.
+
+**Live Application:**
+
+https://ai-resume-screening-tool.streamlit.app
 # Project Outputs
 
 After successful execution, the application generates the following outputs:

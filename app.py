@@ -15,6 +15,20 @@ st.set_page_config(
     page_icon="📄",
     layout="wide"
 )
+# ---------------- SESSION STATE ----------------
+
+if "ranking_df" not in st.session_state:
+    st.session_state.ranking_df = None
+
+if "csv_data" not in st.session_state:
+    st.session_state.csv_data = None
+
+if "pdf_file" not in st.session_state:
+    st.session_state.pdf_file = None
+
+if "best_candidate" not in st.session_state:
+    st.session_state.best_candidate = None
+
 # -------------------- INFO -------------------------------
 st.info("""
 ### 📋 Project Summary
@@ -123,6 +137,8 @@ if st.button("🚀 Start Screening"):
                 st.error("❌ No valid resumes were processed.")
                 st.stop()
             ranking_df = rank_candidates(candidate_results)
+            st.session_state.ranking_df = ranking_df
+            st.session_state.best_candidate = ranking_df.iloc[0]
             best_candidate = ranking_df.iloc[0]
             st.markdown("---")
             st.subheader("🏆 Best Candidate")
@@ -157,21 +173,23 @@ if st.button("🚀 Start Screening"):
         # ---------------- DOWNLOAD REPORTS ----------------
 
             csv = convert_df_to_csv(ranking_df)
+            st.session_state.csv_data = csv
 
             pdf_file = generate_pdf(ranking_df,job_description.name.replace(".txt", ""))
+            st.session_state.pdf_file = pdf_file
 
             col1, col2 = st.columns(2)
 
             with col1:
                 st.download_button(
                     label="📥 Download CSV Report",
-                    data=csv,
+                    data=st.session_state.csv_data,
                     file_name="candidate_ranking_report.csv",
                     mime="text/csv"
                 )
 
             with col2:
-                with open(pdf_file, "rb") as pdf:
+                with open(st.session_state.pdf_file, "rb") as pdf:
                     st.download_button(
                         label="📄 Download PDF Report",
                         data=pdf,

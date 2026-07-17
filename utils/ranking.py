@@ -6,9 +6,9 @@ def get_recommendation(score):
     Return recommendation label based on match score.
     """
 
-    if score >= 85:
+    if score >= 80:
         return " Highly Recommended"
-    elif score >= 70:
+    elif score >= 65:
         return " Recommended"
     elif score >= 50:
         return " Consider"
