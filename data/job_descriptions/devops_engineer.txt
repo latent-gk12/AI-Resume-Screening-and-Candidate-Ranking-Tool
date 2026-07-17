@@ -1,0 +1,33 @@
+Job Title: DevOps Engineer
+
+Company: ABC Technologies Pvt. Ltd.
+
+Location: Bengaluru, India
+
+Employment Type: Full-Time
+
+Job Summary:
+We are looking for a DevOps Engineer to automate deployment pipelines and manage cloud infrastructure.
+
+Responsibilities:
+- Build CI/CD pipelines.
+- Manage Docker containers.
+- Deploy applications.
+- Monitor infrastructure.
+- Automate workflows.
+
+Required Skills:
+- Linux
+- Docker
+- Kubernetes
+- Git
+- Jenkins
+- AWS
+- Shell Scripting
+- Python
+- Terraform
+
+Preferred Skills:
+- Ansible
+- Prometheus
+- Grafana

@@ -1,0 +1,34 @@
+Job Title: Data Analyst
+
+Company: ABC Technologies Pvt. Ltd.
+
+Location: Pune, India
+
+Employment Type: Full-Time
+
+Job Summary:
+We are looking for a Data Analyst to collect, clean, analyze, and visualize business data for decision-making.
+
+Responsibilities:
+- Analyze datasets.
+- Build dashboards.
+- Write SQL queries.
+- Perform EDA.
+- Create reports.
+
+Required Skills:
+- SQL
+- Python
+- Pandas
+- NumPy
+- Excel
+- Power BI
+- Statistics
+- Data Cleaning
+- Data Visualization
+- Communication
+
+Preferred Skills:
+- Machine Learning Basics
+- Tableau
+- Git

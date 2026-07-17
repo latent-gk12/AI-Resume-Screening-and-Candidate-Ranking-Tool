@@ -1,0 +1,32 @@
+Job Title: Java Developer
+
+Company: ABC Technologies Pvt. Ltd.
+
+Location: Noida, India
+
+Employment Type: Full-Time
+
+Job Summary:
+Develop enterprise applications using Java and Spring Boot.
+
+Responsibilities:
+- Develop Java applications.
+- Build REST APIs.
+- Write optimized SQL queries.
+- Debug software.
+- Maintain code quality.
+
+Required Skills:
+- Java
+- Spring Boot
+- Hibernate
+- SQL
+- OOP
+- REST API
+- Git
+- Maven
+
+Preferred Skills:
+- Docker
+- AWS
+- Microservices

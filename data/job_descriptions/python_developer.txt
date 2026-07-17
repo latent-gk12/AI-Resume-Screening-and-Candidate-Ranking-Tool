@@ -1,0 +1,35 @@
+Job Title: Python Developer
+
+Company: ABC Technologies Pvt. Ltd.
+
+Location: Hyderabad, India
+
+Employment Type: Full-Time
+
+Job Summary:
+We are hiring a Python Developer to build scalable backend applications and REST APIs.
+
+Responsibilities:
+- Develop backend services.
+- Design REST APIs.
+- Optimize performance.
+- Write clean code.
+- Debug applications.
+
+Required Skills:
+- Python
+- OOP
+- FastAPI
+- Flask
+- Django
+- SQL
+- Git
+- REST API
+- JSON
+- Problem Solving
+
+Preferred Skills:
+- Docker
+- Linux
+- AWS
+- Redis

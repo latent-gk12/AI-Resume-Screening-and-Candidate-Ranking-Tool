@@ -1,0 +1,39 @@
+Job Title: AI/ML Engineer
+
+Company: ABC Technologies Pvt. Ltd.
+
+Location: Bengaluru, India
+
+Employment Type: Full-Time
+
+Job Summary:
+We are seeking a motivated AI/ML Engineer to design, develop, and deploy machine learning solutions for real-world business problems. The ideal candidate should have experience in Python, machine learning, deep learning fundamentals, and data preprocessing.
+
+Key Responsibilities:
+- Build and train machine learning models.
+- Perform data preprocessing and feature engineering.
+- Analyze datasets and generate insights.
+- Optimize model performance.
+- Deploy ML models using APIs.
+- Work with cross-functional teams.
+
+Required Skills:
+- Python
+- Machine Learning
+- Deep Learning
+- Scikit-learn
+- Pandas
+- NumPy
+- TensorFlow or PyTorch
+- SQL
+- Data Structures
+- Git
+- FastAPI
+- Problem Solving
+
+Preferred Skills:
+- NLP
+- Computer Vision
+- Docker
+- AWS
+- MLOps
