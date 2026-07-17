@@ -64,99 +64,121 @@ if st.button("🚀 Start Screening"):
 
         elif len(resume_files) == 0:
             st.error("Please upload at least one Resume.")
-
         else:
+            st.success("✅ Files validated successfully. Starting AI screening...")
 
-            st.success("Files uploaded successfully!")
+            # ---------------- JOB DESCRIPTION ----------------
 
-        # ---------------- JOB DESCRIPTION ----------------
+            jd_text = job_description.read().decode("utf-8")
+            jd_text = preprocess_text(jd_text)
+            jd_embedding = generate_embedding(jd_text)
 
-        jd_text = job_description.read().decode("utf-8")
-        jd_text = preprocess_text(jd_text)
-        jd_embedding = generate_embedding(jd_text)
+            # ---------------- STORE RESULTS ----------------
 
-        # ---------------- STORE RESULTS ----------------
+            candidate_results = []
+            progress_bar = st.progress(0)
 
-        candidate_results = []
-        progress_bar = st.progress(0)
+            progress_text = st.empty()
 
-        total_resumes = len(resume_files)
+            total_resumes = len(resume_files)
 
-        # ---------------- PROCESS EACH RESUME ----------------
+            # ---------------- PROCESS EACH RESUME ----------------
 
-        for index,resume in enumerate(resume_files):
+            for index,resume in enumerate(resume_files):
 
-            resume_text = extract_text_from_pdf(resume)
+                resume_text = extract_text_from_pdf(resume)
 
-            if resume_text is None:
-                st.warning(f"⚠ {resume.name} is a scanned/image-based PDF.\n" "Please upload a text-based PDF.")
-                continue
+                if resume_text is None:
+                    st.warning(f"⚠ {resume.name} is a scanned/image-based PDF.\n" "Please upload a text-based PDF.")
+                    continue
 
-            clean_text = preprocess_text(resume_text)
+                clean_text = preprocess_text(resume_text)
 
-            resume_embedding = generate_embedding(clean_text)
+                resume_embedding = generate_embedding(clean_text)
 
-            score = calculate_similarity(
-                jd_embedding,
-                resume_embedding
-            )
+                score = calculate_similarity(
+                    jd_embedding,
+                    resume_embedding
+                )
 
-            candidate_results.append(
-                {
-                    "Candidate Name": resume.name.replace(".pdf", ""),
-                    "Match Score": round(score, 2)
-                }
-            )
-            progress_bar.progress((index + 1)/ total_resumes)
-
-        # ---------------- RANKING ----------------
-
-        ranking_df = rank_candidates(candidate_results)
-        best_candidate = ranking_df.iloc[0]
-        st.markdown("---")
-        st.subheader("🏆 Best Candidate")
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.metric("Candidate",best_candidate["Candidate Name"])
-        with col2:
-            st.metric("Match Score",f"{best_candidate["Match Score"]:.2f}%")
-        with col3:
-            st.metric("Recommendation", best_candidate["Recommendation"])
-
-        st.markdown("---")
-
-        st.markdown("---")
-        st.header("🏆 Candidate Ranking Dashboard")
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.metric("👥 Total Candidates",len(ranking_df))
-        with col2:
-            st.metric("🥇 Top Score",f"{ranking_df.iloc[0]['Match Score']:.2f}%")
-
-        with col3:
-            st.metric( "⭐ Best Candidate",ranking_df.iloc[0]["Candidate Name"])
-
-        st.markdown("----")
-
-
-
-        st.dataframe(
-            ranking_df,
-            use_container_width=True
-        )
-
-        csv = convert_df_to_csv(ranking_df)
-
-        st.download_button(
-            label="📥 Download Ranking Report (CSV)",
-            data=csv,
-            file_name="candidate_ranking_report.csv",
-            mime="text/csv"
-        )
-        pdf_file = generate_pdf(ranking_df)
-
-        with open(pdf_file, "rb") as pdf:
-            st.download_button("📄 Download PDF Report",pdf,file_name="Candidate_Ranking_Report.pdf",mime="application/pdf")
-
+                candidate_results.append(
+                    {
+                        "Candidate Name": resume.name.replace(".pdf", ""),
+                        "Match Score": round(score, 2)
+                    }
+                )
             
-st.success("✅ Resume screening completed successfully!")
+                percent = int(((index + 1) / total_resumes) * 100)
+
+                progress_bar.progress(percent)
+
+                progress_text.text(f"🔄 Processing Resume {index + 1}/{total_resumes} ({percent}%)")
+
+            progress_text.success("✅ Screening Completed Successfully!")
+            st.balloons()
+            progress_bar.progress(100)
+
+            # ---------------- RANKING ----------------
+            if len(candidate_results) == 0:
+                st.error("❌ No valid resumes were processed.")
+                st.stop()
+            ranking_df = rank_candidates(candidate_results)
+            best_candidate = ranking_df.iloc[0]
+            st.markdown("---")
+            st.subheader("🏆 Best Candidate")
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("👤 Best Candidate",best_candidate["Candidate Name"])
+            with col2:
+                best_score = best_candidate["Match Score"]
+                st.metric("Match Score",f"{best_score:.2f}%")
+            with col3:
+                st.metric("Recommendation", best_candidate["Recommendation"])
+
+            st.markdown("---")
+            st.header("📊 Candidate Ranking Dashboard")
+            st.caption("Candidates ranked according to semantic similarity with the uploaded job description.")
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("👥 Total Candidates",len(ranking_df))
+            with col2:
+                st.metric("🥇 Top Score",f"{ranking_df.iloc[0]['Match Score']:.2f}%")
+            with col3:
+                st.metric( "⭐ Best Candidate",ranking_df.iloc[0]["Candidate Name"])
+
+            st.markdown("----")
+
+
+
+            st.dataframe(
+                ranking_df,
+                use_container_width=True
+            )
+        # ---------------- DOWNLOAD REPORTS ----------------
+
+            csv = convert_df_to_csv(ranking_df)
+
+            pdf_file = generate_pdf(ranking_df,job_description.name.replace(".txt", ""))
+
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.download_button(
+                    label="📥 Download CSV Report",
+                    data=csv,
+                    file_name="candidate_ranking_report.csv",
+                    mime="text/csv"
+                )
+
+            with col2:
+                with open(pdf_file, "rb") as pdf:
+                    st.download_button(
+                        label="📄 Download PDF Report",
+                        data=pdf,
+                        file_name="Candidate_Ranking_Report.pdf",
+                        mime="application/pdf"
+                    )
+
+        
+
+            st.success("✅ Resume screening completed successfully!")
